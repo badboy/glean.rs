@@ -11,18 +11,11 @@ const MAX_LABELS: usize = 16;
 const OTHER_LABEL: &str = "__other__";
 const MAX_LABEL_LENGTH: usize = 61;
 
-/// Checks whether the given value matches the label regex.
+/// Checks whether the given label is sane. 
 ///
-/// This regex is used for matching against labels and should allow for dots,
-/// underscores, and/or hyphens. Labels are also limited to starting with either
-/// a letter or an underscore character.
-///
-/// The exact regex (from the pipeline schema [here](https://github.com/mozilla-services/mozilla-pipeline-schemas/blob/master/templates/include/glean/dot_separated_short_id.1.schema.json)) is:
-///
-///    "^[a-z_][a-z0-9_-]{0,29}(\\.[a-z_][a-z0-9_-]{0,29})*$"
-///
-/// The regex crate isn't used here because it adds to the binary size, and the
-/// Glean SDK doesn't use regular expressions anywhere else.
+/// While this could be implemented as a regex, the regex crate isn't
+/// used here because it adds to the binary size, and the Glean SDK doesn't
+/// use regular expressions anywhere else.
 ///
 /// Some examples of good and bad labels:
 ///
